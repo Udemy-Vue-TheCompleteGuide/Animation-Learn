@@ -9,17 +9,32 @@
     <hr>
 
     <!-- First exercise. Creating fade transition. -->
-    <div class="row">
+    <div class="row exercise-box">
       <div class="col-sm-12 col-md-6 col-md-offset-3">
         <h4>First exercise</h4>
-        <button class="btn btn-success" @click="showHide">Show/Hide</button>
+        <button class="btn btn-success" @click="showHide1">Show/Hide</button>
         <br><br>
         <transition name="fade">
-          <div class="alert alert-info" v-if="visible">This is some info</div>
+          <div class="alert alert-info" v-if="visible1">This is some info using fade transition</div>
         </transition>
       </div>
     </div>
-  </div>
+
+    <hr>
+
+    <!-- Second exercise. Creating slide animation. -->
+    <div class="row exercise-box">
+      <div class="col-sm-12 col-md-6 col-md-offset-3">
+        <h4>Second exercise</h4>
+        <button class="btn btn-success" @click="showHide2">Show/Hide</button>
+        <br><br>
+        <transition name="slide">
+          <div class="alert alert-info" v-if="visible2">This is some info using slide animation</div>
+        </transition>
+      </div>
+    </div>
+
+  </div> <!-- container -->
 </template>
 
 <script>
@@ -28,19 +43,30 @@ export default {
   name: 'App',
   data() {
     return {
-      visible: false
+      visible1: false,
+      visible2: false,
     }
   },
   components: {},
   methods: {
-    showHide() {
-      this.visible = !this.visible;
-    }
+    showHide1() {
+      this.visible1 = !this.visible1;
+    },
+    showHide2() {
+      this.visible2 = !this.visible2;
+    },
+
   }
 }
 </script>
 
 <style>
+.exercise-box {
+  height: 200px;
+  border: 1px lightgray solid;
+  box-shadow: 2px 2px 5px lightgray;
+}
+
 /*
 * Fade transition.
 * Any Vue transition with name fade will use this classes.
@@ -50,7 +76,7 @@ export default {
   opacity: 0;
 }
 
-.fade-enter-active {
+.fade-enter-to {
   transition: opacity 1s;
 }
 
@@ -58,8 +84,56 @@ export default {
   /*opacity: 1;*/
 }
 
-.fade-leave-active {
+.fade-leave-to {
   transition: opacity 1s;
   opacity: 0;
+}
+
+/*------------------------------------------------------------------------------------------------------------------*/
+
+/*
+* Slide animation.
+* Any Vue transition with name slide will use this classes.
+*/
+.slide-enter {
+  opacity: 0;
+  /*transform: translateY(20px);*/
+}
+
+.slide-enter-to {
+  transition: opacity 500ms;
+  animation: slide-in 1s ease-out forwards;
+}
+
+.slide-leave {
+  /*opacity: 1;*/
+  width: 100%;
+  font-size: initial;
+}
+
+.slide-leave-to {
+  opacity: 0;
+  width: 0;
+  font-size: 0;
+  transition: opacity 500ms, width 1s, font-size 1s;
+  animation: slide-out 500ms ease-out forwards;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(20px);
+  }
 }
 </style>
