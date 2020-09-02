@@ -34,6 +34,17 @@
       </div>
     </div>
 
+    <!-- Third exercise. Creating slide animation. -->
+    <div class="row exercise-box">
+      <div class="col-sm-12 col-md-6 col-md-offset-3">
+        <h4>Third exercise</h4>
+        <p>Animate on load</p>
+        <transition name="fade" appear>
+          <div class="alert alert-info">This is some info using fade animation on component load</div>
+        </transition>
+      </div>
+    </div>
+
   </div> <!-- container -->
 </template>
 
