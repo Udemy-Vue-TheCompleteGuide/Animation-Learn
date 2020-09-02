@@ -46,6 +46,25 @@
     </div>
 
 
+    <!-- Forth exercise. Creating animation using css framework Animate.style. -->
+    <div class="row exercise-box">
+      <div class="col-sm-12 col-md-6 col-md-offset-3">
+        <h4>Forth exercise</h4>
+        <p>Animate with Animate.style and using the attributes to specify the custom classes</p>
+        <button class="btn btn-success" @click="showHide4">Show/Hide</button>
+        <br><br>
+        <transition name="fade" appear
+                    enter-to-class="animate__animated animate__zoomIn"
+                    leave-to-class="animate__animated animate__zoomOut"
+        >
+          <div class="alert alert-info" v-if="visible4"
+          >
+            This is some info using fade animation using custom classes from Animate.style
+          </div>
+        </transition>
+      </div>
+    </div>
+
   </div> <!-- container -->
 </template>
 
@@ -57,6 +76,7 @@ export default {
     return {
       visible1: false,
       visible2: false,
+      visible4: false,
     }
   },
   components: {},
@@ -67,7 +87,9 @@ export default {
     showHide2() {
       this.visible2 = !this.visible2;
     },
-
+    showHide4() {
+      this.visible4 = !this.visible4;
+    },
   }
 }
 </script>
