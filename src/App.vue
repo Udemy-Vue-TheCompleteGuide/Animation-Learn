@@ -53,14 +53,35 @@
         <p>Animate with Animate.style and using the attributes to specify the custom classes</p>
         <button class="btn btn-success" @click="showHide4">Show/Hide</button>
         <br><br>
-        <transition name="fade" appear
-                    enter-to-class="animate__animated animate__zoomIn"
+        <transition enter-to-class="animate__animated animate__zoomIn"
                     leave-to-class="animate__animated animate__zoomOut"
         >
-          <div class="alert alert-info" v-if="visible4"
-          >
+          <div class="alert alert-info" v-if="visible4">
             This is some info using fade animation using custom classes from Animate.style
           </div>
+        </transition>
+      </div>
+    </div>
+
+
+    <!-- Fifth exercise. Creating animation between two or more elements. -->
+    <div class="row exercise-box">
+      <div class="col-sm-12 col-md-6 col-md-offset-3">
+        <h4>Fifth exercise</h4>
+        <p>
+          Animate between two or more elements. When more than one element is used only the v-if/v-else and so on
+          can be used. v-show cannot be used.
+          Remember only one element at the end can be visible at a time.
+        </p>
+        <p>Remember add the key attribute and the mode attribute (in-out, out-int)</p>
+        <button class="btn btn-success" @click="showHide5">Switch</button>
+        <br><br>
+        <transition mode="out-in"
+                    enter-to-class="animate__animated animate__backInDown"
+                    leave-to-class="animate__animated animate__backOutDown"
+        >
+          <div class="alert alert-info" v-if="visible5" key="info">This is some info</div>
+          <div class="alert alert-warning" v-else key="warning">This is some warning</div>
         </transition>
       </div>
     </div>
@@ -77,6 +98,7 @@ export default {
       visible1: false,
       visible2: false,
       visible4: false,
+      visible5: false,
     }
   },
   components: {},
@@ -89,6 +111,9 @@ export default {
     },
     showHide4() {
       this.visible4 = !this.visible4;
+    },
+    showHide5() {
+      this.visible5 = !this.visible5;
     },
   }
 }
