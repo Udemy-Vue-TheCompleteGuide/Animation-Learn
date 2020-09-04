@@ -112,6 +112,29 @@
       </div>
     </div>
 
+
+    <!-- Seventh exercise.  -->
+    <div class="row exercise-box">
+      <div class="col-sm-12 col-md-6 col-md-offset-3">
+        <h4>Seventh exercise</h4>
+        <p>
+          Animate List.
+        </p>
+        <button v-on:click="shuffle">Shuffle</button>
+        <button v-on:click="add">Add</button>
+        <button v-on:click="remove">Remove</button>
+        <br><br>
+        <transition-group name="list-complete" tag="p">
+          <span v-for="item in items"
+                v-bind:key="item"
+                class="list-complete-item"
+          >
+            {{ item }}
+          </span>
+        </transition-group>
+      </div>
+    </div>
+
     <br><br>
   </div> <!-- container -->
 </template>
@@ -119,6 +142,7 @@
 <script>
 import WarningAlert from "@/components/WarningAlert";
 import SuccessAlert from "@/components/SuccessAlert";
+import _ from 'lodash';
 
 export default {
   name: 'App',
@@ -128,7 +152,9 @@ export default {
       visible2: false,
       visible4: false,
       visible5: false,
-      componentSelected: 'WarningAlert'
+      componentSelected: 'WarningAlert',
+      items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      nextNum: 10
     }
   },
   components: {
@@ -148,6 +174,20 @@ export default {
     showHide5() {
       this.visible5 = !this.visible5;
     },
+
+
+    randomIndex: function () {
+      return Math.floor(Math.random() * this.items.length)
+    },
+    add: function () {
+      this.items.splice(this.randomIndex(), 0, this.nextNum++)
+    },
+    remove: function () {
+      this.items.splice(this.randomIndex(), 1)
+    },
+    shuffle: function () {
+      this.items = _.shuffle(this.items)
+    }
   }
 }
 </script>
@@ -228,4 +268,24 @@ export default {
     transform: translateY(20px);
   }
 }
+
+/*------------------------------------------------------------------------------------------------------------------*/
+
+.list-complete-item {
+  transition: all 1s;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.list-complete-enter, .list-complete-leave-to
+  /* .list-complete-leave-active below version 2.1.8 */
+{
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.list-complete-leave-active {
+  position: absolute;
+}
+
 </style>
