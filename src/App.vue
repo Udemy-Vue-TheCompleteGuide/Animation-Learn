@@ -125,14 +125,14 @@
         <button v-on:click="add">Add</button>
         <button v-on:click="remove">Remove</button>
         <br><br>
-                <transition-group name="list-complete" tag="p">
-                  <span v-for="item in items"
-                        v-bind:key="item"
-                        class="list-complete-item"
-                  >
-                    {{ item }}
-                  </span>
-                </transition-group>
+        <transition-group name="list-complete" tag="p" enter-to-class="list-complete-enter-to">
+          <span v-for="item in items"
+                v-bind:key="item"
+                class="list-complete-item"
+          >
+            {{ item }}
+          </span>
+        </transition-group>
       </div>
     </div>
 
