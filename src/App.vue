@@ -113,25 +113,26 @@
     </div>
 
 
-    <!-- Seventh exercise.  -->
+    <!-- Seventh exercise. Animate list of items -->
     <div class="row exercise-box">
       <div class="col-sm-12 col-md-6 col-md-offset-3">
         <h4>Seventh exercise</h4>
         <p>
-          Animate List.
+          Animate List of items. Use <b>transition-group</b> component.
+          To use the Animate.style framework need to apply on the classes using <b>animate</b> property.
         </p>
         <button v-on:click="shuffle">Shuffle</button>
         <button v-on:click="add">Add</button>
         <button v-on:click="remove">Remove</button>
         <br><br>
-        <transition-group name="list-complete" tag="p">
-          <span v-for="item in items"
-                v-bind:key="item"
-                class="list-complete-item"
-          >
-            {{ item }}
-          </span>
-        </transition-group>
+                <transition-group name="list-complete" tag="p">
+                  <span v-for="item in items"
+                        v-bind:key="item"
+                        class="list-complete-item"
+                  >
+                    {{ item }}
+                  </span>
+                </transition-group>
       </div>
     </div>
 
@@ -175,7 +176,7 @@ export default {
       this.visible5 = !this.visible5;
     },
 
-
+    /* List animation */
     randomIndex: function () {
       return Math.floor(Math.random() * this.items.length)
     },
@@ -272,16 +273,27 @@ export default {
 /*------------------------------------------------------------------------------------------------------------------*/
 
 .list-complete-item {
-  transition: all 1s;
+  transition: all 2s;
   display: inline-block;
   margin-right: 10px;
+}
+
+.list-complete-enter-to {
+  /* .list-complete-enter-active below version 2.1.8 */
+  animation: flip; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 2s; /* don't forget to set a duration! */
 }
 
 .list-complete-enter, .list-complete-leave-to
   /* .list-complete-leave-active below version 2.1.8 */
 {
-  opacity: 0;
-  transform: translateY(30px);
+  /* Manual animations */
+  /*opacity: 0;*/
+  /*transform: translateY(30px);*/
+
+  /* using framework */
+  animation: rotateOut, fadeOut; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 2s; /* don't forget to set a duration! */
 }
 
 .list-complete-leave-active {
