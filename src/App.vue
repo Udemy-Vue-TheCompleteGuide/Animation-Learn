@@ -53,8 +53,8 @@
         <p>Animate with Animate.style and using the attributes to specify the custom classes</p>
         <button class="btn btn-success" @click="showHide4">Show/Hide</button>
         <br><br>
-        <transition enter-to-class="animate__animated animate__zoomIn"
-                    leave-to-class="animate__animated animate__zoomOut"
+        <transition enter-active-class="animate__animated animate__zoomIn"
+                    leave-active-class="animate__animated animate__zoomOut"
         >
           <div class="alert alert-info" v-if="visible4">
             This is some info using fade animation using custom classes from Animate.style
@@ -77,8 +77,8 @@
         <button class="btn btn-success" @click="showHide5">Switch</button>
         <br><br>
         <transition mode="out-in"
-                    enter-to-class="animate__animated animate__backInDown"
-                    leave-to-class="animate__animated animate__backOutDown"
+                    enter-active-class="animate__animated animate__backInUp"
+                    leave-active-class="animate__animated animate__backOutDown"
         >
           <div class="alert alert-info" v-if="visible5" key="info">This is some info</div>
           <div class="alert alert-warning" v-else key="warning">This is some warning</div>
@@ -86,10 +86,39 @@
       </div>
     </div>
 
+    <!-- Sixth exercise. Creating animation between two dynamic components. -->
+    <div class="row exercise-box">
+      <div class="col-sm-12 col-md-6 col-md-offset-3">
+        <h4>Sixth exercise</h4>
+        <p>
+          Animate between two or more dynamic components.
+          To render components dynamically use the special component called "component"
+          and specify the name of the component with the attribute "is".
+        </p>
+        <p>Remember add the key attribute and the mode attribute (in-out, out-int)</p>
+        <label for="selectComponent">Select Component</label>
+        <select id="selectComponent" class="form-control"
+                v-model="componentSelected">
+          <option value="WarningAlert">Warning Alert</option>
+          <option value="SuccessAlert">Success Alert</option>
+        </select>
+        <br><br>
+        <transition mode="out-in"
+                    enter-active-class="animate__animated animate__bounceInRight"
+                    leave-active-class="animate__animated animate__bounceOutLeft"
+        >
+          <component :is="componentSelected"></component>
+        </transition>
+      </div>
+    </div>
+
+    <br><br>
   </div> <!-- container -->
 </template>
 
 <script>
+import WarningAlert from "@/components/WarningAlert";
+import SuccessAlert from "@/components/SuccessAlert";
 
 export default {
   name: 'App',
@@ -99,9 +128,13 @@ export default {
       visible2: false,
       visible4: false,
       visible5: false,
+      componentSelected: 'WarningAlert'
     }
   },
-  components: {},
+  components: {
+    WarningAlert,
+    SuccessAlert
+  },
   methods: {
     showHide1() {
       this.visible1 = !this.visible1;
@@ -121,7 +154,7 @@ export default {
 
 <style>
 .exercise-box {
-  height: 200px;
+  min-height: 200px;
   border: 1px lightgray solid;
   box-shadow: 2px 2px 5px lightgray;
 }
